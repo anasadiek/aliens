@@ -55,7 +55,8 @@ on aliens.id = location.loc_id
 join details 
 on aliens.id = details.detail_id 
 group by location.state ) 
-select * ,(cte.friendly/cte.total) as "f%" ,(cte.agressive/cte.total) as "A%" from cte 
+select * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
+order by count desc
 
 
 
