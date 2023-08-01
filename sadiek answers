@@ -52,6 +52,8 @@ order by count(aliens.id) desc
 
 
 
+
+
 --What are the yougest and oldest alien ages in the U.S.?
 --The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below.
 --What regions have the highest population of aliens and what is the overall population percentage per region?
