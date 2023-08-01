@@ -62,27 +62,40 @@
 
 --What are the yougest and oldest alien ages in the U.S.?
 
-with old as ( select    max( '2023' - birth_year ) as "oldest age"  from aliens  ) 
+--with old as ( select    max( '2023' - birth_year ) as "oldest age"  from aliens  ) 
 
-, young as  ( select   min( '2023' - birth_year ) as "youngest age"  from aliens  ) 
+--, young as  ( select   min( '2023' - birth_year ) as "youngest age"  from aliens  ) 
 
- select * from young ,  old 
+-- select * from young ,  old 
 
-select *, ( '2023' - birth_year ) as "age"  from aliens 
-
-
+--select *, ( '2023' - birth_year ) as "age"  from aliens 
 
 
 
 
---The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below. 
-What regions have the highest population of aliens and what is the overall population percentage per region?
-
-https://github.com/iweld/aliens_of_america/raw/main/images/bea_us_regions.JPG
 
 
+--What is the alien population and gender percentage per state? Rank results according to gender percentage results.
 
---What is the alien population and gender percentage per region? Rank results according to gender percentage results.
+
+
+select * from (select count(aliens.id) as "count"  , location.state , aliens.gender
+from aliens join location 
+on location.loc_id = aliens.id 
+group by location.state , aliens.gender) t 
+pivot  ( sum([count]) for gender in("female" , "male","Non-binary","Genderfluid","Bigender","Polygender","Agender","Genderqueer")) as pivottable 
+
+
+
+
+select gender from aliens 
+group by gender 
+select * from location 
+select * from details 
+
+
+
+
 --How many different aliens species live in the U.S. and are they concentrated in any particular region? 
 --Use a cte to rank the species type by their region and return the top 2 ranked species per region.
 --What is the top favorite food of every species including ties?
