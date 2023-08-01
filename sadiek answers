@@ -25,11 +25,33 @@
 
 --How many countrys are present in our dataset?
 
+--select count(distinct country) as count 
+--from location 
+
 
 
 --Are all states represented in the dataset?
+
+
+--select state
+--from location
+--group by state	
+
+
+
 --What is the count of aliens per state and what is the average age? Order from highest to lowest population.
 -- Include the percentage of hostile vs. friendly aliens per state. Limit the first 10 for brevity.
+
+
+
+select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" 
+from aliens join location 
+on aliens.id = location.loc_id
+group by location.state 
+order by count(aliens.id) desc
+
+
+
 --What are the yougest and oldest alien ages in the U.S.?
 --The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below.
 --What regions have the highest population of aliens and what is the overall population percentage per region?
