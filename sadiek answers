@@ -88,21 +88,15 @@
 
 
 
-
---How many different aliens species live in the U.S ? 
-
-
-
-select type,count(id) as "count" 
-from aliens 
-group by type  
-
-
---Use a cte to rank the species type by their region and return the top 2 ranked species per region.
-
-
-
-
---What is the top favorite food of every species including ties?
 --Which are the top 10 cities where aliens are located and is the population majority hostile or friendly?
 
+
+--with cte as ( select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" ,
+--count(details.aggressive) as "total" ,sum(details.aggressive) as "agressive" , (count(details.aggressive) - sum(details.aggressive)) as "friendly"
+--from aliens join location 
+--on aliens.id = location.loc_id
+--join details 
+--on aliens.id = details.detail_id 
+--group by location.state ) 
+--select top 10 * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
+--order by count desc
