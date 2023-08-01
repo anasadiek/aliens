@@ -1,0 +1,20 @@
+https://github.com/iweld/aliens_of_america/blob/main/ANALYSIS.md
+
+create database aliens;
+
+
+How many records are in the dataset?
+Are there any duplicate email addresses which could indicate duplicate records?
+How many countrys are present in our dataset?
+Are all states represented in the dataset?
+What is the count of aliens per state and what is the average age? Order from highest to lowest population.
+ Include the percentage of hostile vs. friendly aliens per state. Limit the first 10 for brevity.
+What are the yougest and oldest alien ages in the U.S.?
+The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below.
+What regions have the highest population of aliens and what is the overall population percentage per region?
+What is the alien population and gender percentage per region? Rank results according to gender percentage results.
+How many different aliens species live in the U.S. and are they concentrated in any particular region? 
+Use a cte to rank the species type by their region and return the top 2 ranked species per region.
+What is the top favorite food of every species including ties?
+Which are the top 10 cities where aliens are located and is the population majority hostile or friendly?
+
