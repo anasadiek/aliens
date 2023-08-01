@@ -42,29 +42,46 @@
 --What is the count of aliens per state and what is the average age? Order from highest to lowest population.
 -- Include the percentage of hostile vs. friendly aliens per state. Limit the first 10 for brevity.
 
-select * from aliens
-select * from details 
+--select * from aliens
+--select * from details 
 
-alter table details 
-alter column aggressive float;
+--alter table details 
+--alter column aggressive float;
 
-with cte as ( select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" ,
-count(details.aggressive) as "total" ,sum(details.aggressive) as "agressive" , (count(details.aggressive) - sum(details.aggressive)) as "friendly"
-from aliens join location 
-on aliens.id = location.loc_id
-join details 
-on aliens.id = details.detail_id 
-group by location.state ) 
-select top 10 * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
-order by count desc
+--with cte as ( select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" ,
+--count(details.aggressive) as "total" ,sum(details.aggressive) as "agressive" , (count(details.aggressive) - sum(details.aggressive)) as "friendly"
+--from aliens join location 
+--on aliens.id = location.loc_id
+--join details 
+--on aliens.id = details.detail_id 
+--group by location.state ) 
+--select top 10 * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
+--order by count desc
 
 
 
 --What are the yougest and oldest alien ages in the U.S.?
 
+with old as ( select    max( '2023' - birth_year ) as "oldest age"  from aliens  ) 
 
---The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below.
---What regions have the highest population of aliens and what is the overall population percentage per region?
+, young as  ( select   min( '2023' - birth_year ) as "youngest age"  from aliens  ) 
+
+ select * from young ,  old 
+
+select *, ( '2023' - birth_year ) as "age"  from aliens 
+
+
+
+
+
+
+--The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below. 
+What regions have the highest population of aliens and what is the overall population percentage per region?
+
+
+
+
+
 --What is the alien population and gender percentage per region? Rank results according to gender percentage results.
 --How many different aliens species live in the U.S. and are they concentrated in any particular region? 
 --Use a cte to rank the species type by their region and return the top 2 ranked species per region.
