@@ -10,7 +10,7 @@
 
 --How many records are in the dataset?
 
---select count(id)  from aliens 
+--select count(id) as "count"  from aliens 
 
 
 
@@ -18,9 +18,9 @@
 
 --select * from aliens
 
---select email , rn= ROW_NUMBER () over (partition by email order by email ) 
---from aliens 
---order by rn desc
+with cte as ( select email , rn= ROW_NUMBER () over (partition by email order by email ) 
+from aliens ) 
+select * from cte where rn>1
 
 
 --How many countrys are present in our dataset?
