@@ -42,15 +42,20 @@
 --What is the count of aliens per state and what is the average age? Order from highest to lowest population.
 -- Include the percentage of hostile vs. friendly aliens per state. Limit the first 10 for brevity.
 
+select * from aliens
+select * from details 
 
+alter table details 
+alter column aggressive float;
 
-select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" 
+with cte as ( select count(aliens.id) as "count" , location.state , cast(avg( '2023'- aliens.birth_year)as int) as "age" ,
+count(details.aggressive) as "total" ,sum(details.aggressive) as "agressive" , (count(details.aggressive) - sum(details.aggressive)) as "friendly"
 from aliens join location 
 on aliens.id = location.loc_id
-group by location.state 
-order by count(aliens.id) desc
-
-
+join details 
+on aliens.id = details.detail_id 
+group by location.state ) 
+select * ,(cte.friendly/cte.total) as "f%" ,(cte.agressive/cte.total) as "A%" from cte 
 
 
 
