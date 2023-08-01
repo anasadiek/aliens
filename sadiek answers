@@ -79,25 +79,30 @@
 
 
 
-select * from (select count(aliens.id) as "count"  , location.state , aliens.gender
-from aliens join location 
-on location.loc_id = aliens.id 
-group by location.state , aliens.gender) t 
-pivot  ( sum([count]) for gender in("female" , "male","Non-binary","Genderfluid","Bigender","Polygender","Agender","Genderqueer")) as pivottable 
+--select * from (select count(aliens.id) as "count"  , location.state , aliens.gender
+--from aliens join location 
+--on location.loc_id = aliens.id 
+--group by location.state , aliens.gender) t 
+--pivot  ( sum([count]) for gender in("female" , "male","Non-binary","Genderfluid","Bigender","Polygender","Agender","Genderqueer")) as pivottable 
 
 
 
 
-select gender from aliens 
-group by gender 
-select * from location 
-select * from details 
+
+--How many different aliens species live in the U.S ? 
 
 
 
+select type,count(id) as "count" 
+from aliens 
+group by type  
 
---How many different aliens species live in the U.S. and are they concentrated in any particular region? 
+
 --Use a cte to rank the species type by their region and return the top 2 ranked species per region.
+
+
+
+
 --What is the top favorite food of every species including ties?
 --Which are the top 10 cities where aliens are located and is the population majority hostile or friendly?
 
