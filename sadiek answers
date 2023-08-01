@@ -55,12 +55,14 @@ on aliens.id = location.loc_id
 join details 
 on aliens.id = details.detail_id 
 group by location.state ) 
-select * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
+select top 10 * ,cast((cte.friendly/cte.total)as decimal (2,2)) as "f%" ,cast((cte.agressive/cte.total)as decimal(2,2)) as "A%" from cte 
 order by count desc
 
 
 
 --What are the yougest and oldest alien ages in the U.S.?
+
+
 --The U.S. Bureau of Economic Analysis developed an eight-region map of the US seen below.
 --What regions have the highest population of aliens and what is the overall population percentage per region?
 --What is the alien population and gender percentage per region? Rank results according to gender percentage results.
